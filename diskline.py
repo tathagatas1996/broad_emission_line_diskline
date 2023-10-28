@@ -140,9 +140,12 @@ class diskline:
     
     def flam(self, lamda, lam0, factor,
              r_in, r_out, theta_i, norm):
-        """ The frequency array transformed wavelength array"""
+        """ The frequency array transformed wavelength array. The scale factor is introduced to make the normalization ~ 0.1.
+        This is required for fitting purposes.
+        For data fitting this value should be equated with the expression of Chen and Halpern.
+        """
         nu = cns.c/lamda
         ff = self.F( nu,    lam0, factor,
                      r_in, r_out, theta_i)/ lamda**2
-        scale_factor = 1
+        scale_factor = 1e-9
         return scale_factor*norm*ff
